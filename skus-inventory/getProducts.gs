@@ -1,12 +1,11 @@
-
 // Define the schema for the data structure of the connector
 const schema = [
-  { name: '_id', label: 'Product Id', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'name', label: 'Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'sku', label: 'Sku', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: '_id', label: 'Product ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'name', label: 'Product Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'sku', label: 'Product Sku', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'categories._id', label: 'Category ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'categories.name', label: 'Category Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'quantity', label: 'Quantity', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'quantity', label: 'Product Stock', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
 ]
 
 // Return the defined schema to Data Studio
