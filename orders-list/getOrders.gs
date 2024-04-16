@@ -121,42 +121,63 @@ async function isAuthValid() {
 }
 
 async function setCredentials(request) {
-  const body = {
-    username: request.userPass.username,
-    pass_md5_hash: md5(request.userPass.password)
-  }
-  const options = {
-    payload: JSON.stringify(body),
-    headers: {
-      'x-store-id': 1173
-    }
-  }
-  var res = UrlFetchApp.fetch(`${BASE_URL}/_login.json`, options)
-  if (res.getResponseCode() !== 200) {
-    return cc.newSetCredentialsResponse()
-      .setIsValid(false)
-      .build()
+  const rawUserParts = request.userPass.username.split(':')
+  let storeId = 0
+  let authUsername = ''
+  let authId = ''
+  if (rawUserParts.length === 2) {
+    storeId = Number(rawUserParts[0])
+    authId = rawUserParts[1]
   } else {
-    const response = JSON.parse(res)
-    var userProperties = PropertiesService.getUserProperties()
-    userProperties.setProperty('ecom.authenticationId', response._id)
-    userProperties.setProperty('ecom.apiKey', response.api_key)
-    userProperties.setProperty('ecom.storeId', `${response.store_id}`)
-
-    const resAuth = await requestAuthEcomplus(response._id, response.api_key, `${response.store_id}`)
-    if (resAuth.getResponseCode() !== 200) {
+    authUsername = rawUserParts[0]
+  }
+  const rawPass = request.userPass.password
+  let authApiKey = storeId && rawPass.length === 128 ? rawPass : ''
+  const authPassMd5 = authApiKey ? '' : md5(rawPass);
+  let loginData
+  if (!authApiKey) {
+    const resp = UrlFetchApp.fetch(`${BASE_URL}/_login.json`, {
+      payload: JSON.stringify({
+        username: authUsername,
+        pass_md5_hash: authPassMd5,
+      }),
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-store-id': storeId
+      },
+    });
+    if (resp.getResponseCode() !== 200) {
       return cc.newSetCredentialsResponse()
         .setIsValid(false)
         .build()
     }
-    const responseAuth = JSON.parse(resAuth)
-    userProperties.setProperty('ecom.accessToken', responseAuth.access_token)
-    userProperties.setProperty('ecom.expires', responseAuth.expires)
+    loginData = JSON.parse(resp)
+  }
+  if (loginData) {
+    storeId = loginData.store_id
+    authId = loginData._id
+    authApiKey = loginData.api_key
+  }
 
+  var userProperties = PropertiesService.getUserProperties()
+  userProperties.setProperty('ecom.authenticationId', authId)
+  userProperties.setProperty('ecom.apiKey', authApiKey)
+  userProperties.setProperty('ecom.storeId', `${storeId}`)
+  
+  const resAuth = await requestAuthEcomplus(authId, authApiKey, `${storeId}`)
+  if (resAuth.getResponseCode() !== 200) {
     return cc.newSetCredentialsResponse()
-      .setIsValid(true)
+      .setIsValid(false)
       .build()
   }
+  const responseAuth = JSON.parse(resAuth)
+  userProperties.setProperty('ecom.accessToken', responseAuth.access_token)
+  userProperties.setProperty('ecom.expires', responseAuth.expires)
+
+  return cc.newSetCredentialsResponse()
+    .setIsValid(true)
+    .build()
 }
 
 function getConfig(request) {
