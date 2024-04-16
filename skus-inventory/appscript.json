@@ -1,0 +1,14 @@
+{
+  "timeZone": "America/Sao_Paulo",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "dataStudio": {
+    "name": "Products E-com Plus",
+    "company": "E-com Plus",
+    "logoUrl": "https://avatars.githubusercontent.com/u/60898319?s=200&v=4",
+    "addonUrl": "https://github.com/ecomplus/looker-studio-connectors",
+    "supportUrl": "https://github.com/ecomplus/looker-studio-connectors/issues",
+    "description": "Connector for E-com Plus API to get Products"
+  }
+}
