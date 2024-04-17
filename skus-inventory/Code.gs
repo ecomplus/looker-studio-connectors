@@ -6,6 +6,7 @@ const schema = [
   { name: 'categories._id', label: 'Category ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'categories.name', label: 'Category Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'quantity', label: 'Product Stock', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'created_at', label: 'Created', dataType: 'STRING', semantics: { conceptType: 'DIMENSION', semanticType: 'YEAR_MONTH_DAY_SECOND'} },
 ]
 
 // Return the defined schema to Data Studio
@@ -203,7 +204,8 @@ function getData(request) {
                 "categories": 1,
                 "name": 1,
                 "sku": 1,
-                "quantity": 1
+                "quantity": 1,
+                "created_at": 1
             }
         },
         {
@@ -231,6 +233,12 @@ function getData(request) {
           const fields = field.name.split('.')
           const category = product[fields[0]] && product[fields[0]][fields[1]]
           return category || ''
+        }
+        if(field.name.startsWith('created_at')){
+          const dateString = order[field.name].split('T')
+          let date = dateString[0].replaceAll('-','')
+          date += dateString[1].split('.')[0].replaceAll(':','')
+          return date
         }
         return product[field.name] || typeof product[field.name] === 'number' ? product[field.name] : ''
       })

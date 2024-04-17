@@ -17,6 +17,7 @@ const schema = [
   { name: 'items.final_price', label: 'Product Final Price', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
   { name: 'loyalty_points.name', label: 'Loyalty Points Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'loyalty_points.value', label: 'Loyalty Points Value', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'created_at', label: 'Created', dataType: 'STRING', semantics: { conceptType: 'DIMENSION', semanticType: 'YEAR_MONTH_DAY_SECOND'} },
   
 ]
 
@@ -224,7 +225,8 @@ function getData(request) {
                 "items.sku": 1,
                 "items.quantity": 1,
                 "items.price": 1,
-                "items.final_price": 1
+                "items.final_price": 1,
+                "created_at": 1
             }
         },
         {
@@ -272,6 +274,12 @@ function getData(request) {
           const fields = field.name.split('.')
           const amount = order[fields[0]] && order[fields[0]][fields[1]]
           return amount || 0
+        }
+        if(field.name.startsWith('created_at')){
+          const dateString = order[field.name].split('T')
+          let date = dateString[0].replaceAll('-','')
+          date += dateString[1].split('.')[0].replaceAll(':','')
+          return date
         }
         return order[field.name] || typeof order[field.name] === 'number' ? order[field.name] : ''
       })
