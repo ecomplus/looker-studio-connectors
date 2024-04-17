@@ -541,44 +541,44 @@ Access the [Looker Studio](https://lookerstudio.google.com/)
 
 <br/>
 
-4) Select the connector
+5) Select the connector
 
 <br/>
 <img src="assets/images/app-script-32.png">
 
 <br/>
 
-5) Click "Authorize", then you will be redirected to the consent screen you initially created.
+6) Click "Authorize", then you will be redirected to the consent screen you initially created.
 
 <br/>
 <img src="assets/images/app-script-33.png">
 
 <br/>
 
-6) As your app is private and not yet fully approved, this security screen will appear, just authorize your own app by clicking on "Advenced"
+7) As your app is private and not yet fully approved, this security screen will appear, just authorize your own app by clicking on "Advenced"
 
 <br/>
 <img src="assets/images/app-script-34.png">
 
 <br/>
 
-7) And then "Go to your_app_name"
+8) And then "Go to your_app_name"
 
 <br/>
 <img src="assets/images/app-script-35.png">
 
 <br/>
 
-8) Finalize consent by clicking "Allow"
+9) Finalize consent by clicking "Allow"
 
-9) If everything goes well you will see a login screen for the created connector, here you will enter access credentials to your store at E-com Plus, and click "Submit"
+10) If everything goes well you will see a login screen for the created connector, here you will enter access credentials to your store at E-com Plus, and click "Submit"
 
 <br/>
 <img src="assets/images/app-script-37.png">
 
 <br/>
 
-10) If your access is successful, click on "Add",
+11) If your access is successful, click on "Add",
 
 Your connector is installed in your "Report"
 
@@ -587,7 +587,7 @@ Your connector is installed in your "Report"
 
 <br/>
 
-## more
+## More
 
 To create other connectors, repeat steps:
 * [Create a Google appscript](#a3)
