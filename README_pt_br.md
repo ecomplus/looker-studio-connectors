@@ -1,10 +1,12 @@
 # Looker Studio connectors
 
-Custom scripts for Looker Studio connectors to e-com.plus APIs
+[:us: English version](./README.md)
 
-Inspiration: https://apptivasoftware.com/blog/bringing-json-data-from-an-api-into-looker-studio/
+Scripts personalizados para conectores do Looker Studio para APIs e-com.plus
 
-Other references: 
+Inspiração: https://apptivasoftware.com/blog/bringing-json-data-from-an-api-into-looker-studio/
+
+Outras referências:
 
 [1] https://github.com/davidtheweiss/Apps-Script-Season-15-Data-Studio-Service
 
