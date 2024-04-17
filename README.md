@@ -10,10 +10,10 @@ Other references: https://github.com/davidtheweiss/Apps-Script-Season-15-Data-St
 
 **Requirements:**
 
-* [Create a project in Gclod](a1)
-* [Configure consent screen in Gcloud Project](a2)
-* [Create a Google appscript](a3)
-* [Connecting appscript to looker studio](a4)
+* [Create a project in Gclod](#a1)
+* [Configure consent screen in Gcloud Project](#a2)
+* [Create a Google appscript](#a3)
+* [Connecting appscript to looker studio](#a4)
 
 <br/>
 
@@ -571,5 +571,5 @@ Your connector is installed in your "Report"
 ## more
 
 To create other connectors, repeat steps:
-* [Create a Google appscript](a3)
-* [Connecting appscript to looker studio](a4)
+* [Create a Google appscript](#a3)
+* [Connecting appscript to looker studio](#a4)
