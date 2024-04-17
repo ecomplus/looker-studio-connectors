@@ -4,7 +4,13 @@ Custom scripts for Looker Studio connectors to e-com.plus APIs
 
 Inspiration: https://apptivasoftware.com/blog/bringing-json-data-from-an-api-into-looker-studio/
 
-Other references: https://github.com/davidtheweiss/Apps-Script-Season-15-Data-Studio-Service
+Other references: 
+[1] https://github.com/davidtheweiss/Apps-Script-Season-15-Data-Studio-Service
+[2] https://developers.google.com/looker-studio/connector/reference
+[3] https://developers.e-com.plus/docs/reference/
+[4] https://community.e-com.plus/t/aggregation-para-lista-de-produtos-mais-pedidos-em-um-determinado-periodo/3840
+[5] https://www.mongodb.com/docs/manual/core/aggregation-pipeline-optimization/
+
 
 # Setup
 
