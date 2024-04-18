@@ -182,7 +182,68 @@ async function setCredentials(request) {
 }
 
 function getConfig(request) {
+  const config = cc.getConfig()
+  config.newTextInput()
+    .setId('dateInit')
+    .setName('dateInit')
+    .setHelpText('Enter a start date:')
+    .setPlaceholder('DD/MM/AAAA')
 
+  config.newTextInput()
+    .setId('dateEnd')
+    .setName('dateEnd')
+    .setHelpText('Enter a end date:')
+    .setPlaceholder('DD/MM/AAAA')
+
+  return config.build()
+}
+
+function parseDate(params) {
+
+  const dateInit = new Date()
+  dateInit.setDate(1)
+  dateInit.setMonth(0)
+  const dateEnd = new Date()
+  dateEnd.setMonth(11)
+  dateEnd.setDate(31)
+
+  if(params){
+    const endStr = params['dateEnd']
+    const end = endStr && endStr.split('/')
+    if(end.length) {
+      if(end[0] && parseInt(end[0]) <= 31) {
+        dateEnd.setDate(parseInt(end[0]))
+      }
+      if(end[1] && parseInt(end[1]) <= 12) {
+        dateEnd.setMonth(parseInt(end[1]) - 1)
+      }
+
+      if(end[2] && parseInt(end[2]) > 999) {
+        dateEnd.setFullYear(parseInt(end[2]))
+      }
+    }
+
+    const initStr = params['dateInit']
+    const init = initStr && initStr.split('/')
+
+    if(init.length) {
+      if(init[0] && parseInt(init[0]) <= 31) {
+        dateInit.setDate(parseInt(init[0]))
+      }
+      if(init[1] && parseInt(init[1]) <= 12) {
+        dateInit.setMonth(parseInt(init[1]) - 1)
+      }
+
+      if(init[2] && parseInt(init[2]) > 999) {
+        dateInit.setFullYear(parseInt(init[2]))
+      }
+    }
+  }
+
+  return{
+    dateInit: dateInit.toISOString(),
+    dateEnd: dateEnd.toISOString()
+  }
 }
 
 function getData(request) {
@@ -208,32 +269,44 @@ function getData(request) {
       'X-Store-ID': storeId,
       'X-My-ID': authenticationId
     }
+    const {
+      dateInit,
+      dateEnd
+    } = parseDate(request.configParams)
 
     const body= {
      "resource": "orders",
       "pipeline": [
-         {
-            "$project": {
-                "number": 1,
-                "status": 1,
-                "buyers.doc_number": 1,
-                "buyers.main_email": 1,
-                "buyers._id": 1,
-                "amount": 1,
-                "loyalty_points": 1,
-                "items.product_id": 1,
-                "items.sku": 1,
-                "items.quantity": 1,
-                "items.price": 1,
-                "items.final_price": 1,
-                "created_at": 1
+        {
+          "$match" : {
+            "created_at": {
+              "$gte" : dateInit, 
+              "$lte" : dateEnd
             }
+          }
         },
         {
-            "$unwind": {
-                "path": "$items",
-                "preserveNullAndEmptyArrays": true
-            }
+          "$project": {
+            "number": 1,
+            "status": 1,
+            "buyers.doc_number": 1,
+              "buyers.main_email": 1,
+              "buyers._id": 1,
+              "amount": 1,
+              "loyalty_points": 1,
+              "items.product_id": 1,
+              "items.sku": 1,
+              "items.quantity": 1,
+              "items.price": 1,
+              "items.final_price": 1,
+              "created_at": 1
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$items",
+            "preserveNullAndEmptyArrays": true
+          }
         }
       ]
     }
