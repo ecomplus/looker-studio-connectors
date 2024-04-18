@@ -2,7 +2,7 @@
 
 [:us: English version](./README.md)
 
-Scripts personalizados para conectores do Looker Studio para APIs e-com.plus
+Scripts de conectores personalizados do Looker Studio para APIs e-com.plus
 
 Inspiração: https://apptivasoftware.com/blog/bringing-json-data-from-an-api-into-looker-studio/
 
