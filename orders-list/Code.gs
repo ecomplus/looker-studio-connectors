@@ -1,7 +1,7 @@
 // Define the schema for the data structure of the connector
 const schema = [
   { name: '_id', label: 'Order ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'number', label: 'Order Number', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'number', label: 'Order Number', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'status', label: 'Status', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'buyers._id', label: 'Customer ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'buyers.main_email', label: 'Customer E-mail', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
@@ -353,6 +353,9 @@ function getData(request) {
           let date = dateString[0].replaceAll('-','')
           date += dateString[1].split('.')[0].replaceAll(':','')
           return date
+        }
+        if(field.name === 'number'){
+          return order[field.name] ? `${order[field.name]}` : ''
         }
         return order[field.name] || typeof order[field.name] === 'number' ? order[field.name] : ''
       })
