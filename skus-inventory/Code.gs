@@ -235,7 +235,7 @@ function getData(request) {
           return category || ''
         }
         if(field.name.startsWith('created_at')){
-          const dateString = order[field.name].split('T')
+          const dateString = product[field.name].split('T')
           let date = dateString[0].replaceAll('-','')
           date += dateString[1].split('.')[0].replaceAll(':','')
           return date
