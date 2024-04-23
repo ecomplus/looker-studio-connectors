@@ -200,12 +200,20 @@ function getConfig(request) {
 
 function parseDate(params) {
 
-  const dateInit = new Date()
+ const dateInit = new Date();
   dateInit.setDate(1)
   dateInit.setMonth(0)
+  dateInit.setHours(0)
+  dateInit.setMinutes(0)
+  dateInit.setSeconds(0)
+  dateInit.setMilliseconds(0)
   const dateEnd = new Date()
   dateEnd.setMonth(11)
   dateEnd.setDate(31)
+  dateEnd.setHours(-1)
+  dateEnd.setMinutes(59)
+  dateEnd.setSeconds(59)
+  dateEnd.setMilliseconds(999)
 
   if(params){
     const endStr = params['dateEnd']
