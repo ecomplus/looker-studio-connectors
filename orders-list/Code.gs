@@ -2,7 +2,7 @@
 const schema = [
   { name: '_id', label: 'Order ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'number', label: 'Order Number', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'status', label: 'Status', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'financial_status.current', label: 'Status', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'buyers._id', label: 'Customer ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'buyers.main_email', label: 'Customer E-mail', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'buyers.doc_number', label: 'Customer CPF/CNPJ', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
@@ -296,7 +296,7 @@ function getData(request) {
         {
           "$project": {
             "number": 1,
-            "status": 1,
+            "financial_status.current": 1,
             "buyers.doc_number": 1,
               "buyers.main_email": 1,
               "buyers._id": 1,
@@ -361,6 +361,11 @@ function getData(request) {
           let date = dateString[0].replaceAll('-','')
           date += dateString[1].split('.')[0].replaceAll(':','')
           return date
+        }
+        if(field.name.startsWith('financial_status')){
+          const fields = field.name.split('.')
+          const financial_status = order[fields[0]] && order[fields[0]][fields[1]]
+          return financial_status
         }
         if(field.name === 'number'){
           return order[field.name] ? `${order[field.name]}` : ''
