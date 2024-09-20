@@ -1,25 +1,47 @@
 // Define the schema for the data structure of the connector
 const schema = [
-  { name: '_id', label: 'Order ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'number', label: 'Order Number', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'financial_status.current', label: 'Status', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'buyers._id', label: 'Customer ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'buyers.main_email', label: 'Customer E-mail', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'buyers.doc_number', label: 'Customer CPF/CNPJ', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'amount.total', label: 'Order Total', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'amount.subtotal', label: 'Order SubTotal', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'amount.discount', label: 'Order Discount', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'amount.freight', label: 'Order Freight', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'items.product_id', label: 'Product ID', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'items.sku', label: 'Product SKU', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'items.quantity', label: 'Product Quantity', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
-  { name: 'items.price', label: 'Product Price', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
-  { name: 'items.final_price', label: 'Product Final Price', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
-  { name: 'loyalty_points.name', label: 'Loyalty Points Name', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
-  { name: 'loyalty_points.value', label: 'Loyalty Points Value', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
-  { name: 'created_at', label: 'Created', dataType: 'STRING', semantics: { conceptType: 'DIMENSION', semanticType: 'YEAR_MONTH_DAY_SECOND'} },
-  
-]
+  { name: '_id', label: 'ID do pedido', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'number', label: 'Número do pedido', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'financial_status.current', label: 'Status de pagamento', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'buyers._id', label: 'ID do cliente', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'buyers.main_email', label: 'E-mail do cliente', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'buyers.doc_number', label: 'CPF/CNPJ do cliente', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'amount.total', label: 'Total do pedido', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'amount.subtotal', label: 'Subtotal do pedido', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'amount.discount', label: 'Desconto do pedido', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'amount.freight', label: 'Frete do pedido', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'loyalty_points.name', label: 'Nome dos pontos de fidelidade', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'loyalty_points.value', label: 'Valor dos pontos de fidelidade', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'created_at', label: 'Data de criação', dataType: 'STRING', semantics: { conceptType: 'DIMENSION', semanticType: 'YEAR_MONTH_DAY_SECOND'} },
+  { name: 'items.0.sku', label: 'SKU 1', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.0.quantity', label: 'Quantidade SKU 1', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.0.final_price', label: 'Preço SKU 1', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.1.sku', label: 'SKU 2', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.1.quantity', label: 'Quantidade SKU 2', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.1.final_price', label: 'Preço SKU 2', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.2.sku', label: 'SKU 3', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.2.quantity', label: 'Quantidade SKU 3', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.2.final_price', label: 'Preço SKU 3', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.3.sku', label: 'SKU 4', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.3.quantity', label: 'Quantidade SKU 4', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.3.final_price', label: 'Preço SKU 4', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.4.sku', label: 'SKU 5', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.4.quantity', label: 'Quantidade SKU 5', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.4.final_price', label: 'Preço SKU 5', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.5.sku', label: 'SKU 6', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.5.quantity', label: 'Quantidade SKU 6', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.5.final_price', label: 'Preço SKU 6', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.6.sku', label: 'SKU 7', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.6.quantity', label: 'Quantidade SKU 7', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.6.final_price', label: 'Preço SKU 7', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.7.sku', label: 'SKU 8', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.7.quantity', label: 'Quantidade SKU 8', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.7.final_price', label: 'Preço SKU 8', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.8.sku', label: 'SKU 9', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'items.8.quantity', label: 'Quantidade SKU 9', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+  { name: 'items.8.final_price', label: 'Preço SKU 9', dataType: 'NUMBER', semantics: { conceptType: 'METRIC' } },
+];
+
 
 // Return the defined schema to Data Studio
 function getSchema(request) {
@@ -298,22 +320,15 @@ function getData(request) {
             "number": 1,
             "financial_status.current": 1,
             "buyers.doc_number": 1,
-              "buyers.main_email": 1,
-              "buyers._id": 1,
-              "amount": 1,
-              "loyalty_points": 1,
-              "items.product_id": 1,
-              "items.sku": 1,
-              "items.quantity": 1,
-              "items.price": 1,
-              "items.final_price": 1,
-              "created_at": 1
-          }
-        },
-        {
-          "$unwind": {
-            "path": "$items",
-            "preserveNullAndEmptyArrays": true
+            "buyers.main_email": 1,
+            "buyers._id": 1,
+            "amount": 1,
+            "loyalty_points": 1,
+            "items.sku": 1,
+            "items.quantity": 1,
+            "items.price": 1,
+            "items.final_price": 1,
+            "created_at": 1
           }
         }
       ]
@@ -353,8 +368,12 @@ function getData(request) {
         }
         if(field.name.startsWith('items')){
           const fields = field.name.split('.')
-          const amount = order[fields[0]] && order[fields[0]][fields[1]]
-          return amount || 0
+          const item = order.items && order.items[Number(fields[1])]
+          let value = item && item[fields[2]]
+          if (!value && item && field.name.endsWith('final_price')) {
+            value = item.price
+          }
+          return value || (field.dataType === 'NUMBER' ? 0 : '')
         }
         if(field.name.startsWith('created_at')){
           const dateString = order[field.name].split('T')
