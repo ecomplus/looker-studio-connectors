@@ -4,11 +4,11 @@
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "dataStudio": {
-    "name": "Orders E-com Plus",
-    "company": "E-com Plus",
+    "name": "Orders e-com.plus",
+    "company": "e-com.plus",
     "logoUrl": "https://avatars.githubusercontent.com/u/60898319?s=200&v=4",
     "addonUrl": "https://github.com/ecomplus/looker-studio-connectors",
     "supportUrl": "https://github.com/ecomplus/looker-studio-connectors/issues",
-    "description": "Connector for E-com Plus API to get Orders"
+    "description": "Connector for e-com.plus API to get orders"
   }
 }
