@@ -1,6 +1,6 @@
 // Define the schema for the data structure of the connector
 const schema = [
-  { name: 'SKU', label: 'SKU', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'sku', label: 'SKU', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'quantity', label: 'Quantidade', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
   { name: 'paid_amount', label: 'Montante pago', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
   { name: 'avg_price', label: 'Preço médio', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
