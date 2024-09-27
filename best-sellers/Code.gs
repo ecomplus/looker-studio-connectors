@@ -298,24 +298,25 @@ function getData(request) {
 
     const resAggregation = UrlFetchApp.fetch(listOrdersUrl, options)
     const parseAggregation = JSON.parse(resAggregation)
-    const aggregation = parseAggregation.result.reduce((items, order) => {
+    const aggregation = []
+    parseAggregation.result.forEach((order) => {
+      if (!order.items) return
       order.items.forEach((item) => {
         const price = item.final_price || item.price
         const amount = (item.quantity * price)
-        const listedItem = items.find(({ sku }) => sku === item.sku)
+        const listedItem = aggregation.find(({ sku }) => sku === item.sku)
         if (listedItem) {
           listedItem.quantity += item.quantity
           listedItem.paid_amount += amount
         } else {
-          items.push({
+          aggregation.push({
             sku: item.sku,
             quantity: item.quantity,
             paid_amount: amount
           })
         }
       })
-      return items
-    }, [])
+    })
    
     const rows = aggregation.map(item => {
       const values = dataSchema.map(field => {
