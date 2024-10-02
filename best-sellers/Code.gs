@@ -1,6 +1,7 @@
 // Define the schema for the data structure of the connector
 const schema = [
   { name: 'sku', label: 'SKU', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
+  { name: 'name', label: 'Nome do produto', dataType: 'STRING', semantics: { conceptType: 'DIMENSION' } },
   { name: 'quantity', label: 'Quantidade', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
   { name: 'paid_amount', label: 'Montante pago', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
   { name: 'avg_price', label: 'Preço médio', dataType: 'NUMBER', semantics: { conceptType: 'DIMENSION' } },
@@ -282,6 +283,7 @@ function getData(request) {
         {
           "$project": {
             "items.sku": 1,
+            "items.name": 1,
             "items.quantity": 1,
             "items.price": 1,
             "items.final_price": 1,
@@ -311,6 +313,7 @@ function getData(request) {
         } else {
           aggregation.push({
             sku: item.sku,
+            name: item.name,
             quantity: item.quantity,
             paid_amount: amount
           })
@@ -322,6 +325,9 @@ function getData(request) {
       const values = dataSchema.map(field => {
         if (field.name === 'sku') {
           return item.sku
+        }
+        if (field.name === 'name') {
+          return item.name
         }
         if (field.name === 'quantity') {
           return item.quantity
